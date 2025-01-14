@@ -1,0 +1,13 @@
+{
+    "name": "google/login",
+    "description": "google sign up API",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Google\\Login\\": "src/"
+        }
+    },
+    "require": {
+        "google/apiclient": "^2.15.0"
+    }
+}

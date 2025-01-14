@@ -1,0 +1,286 @@
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    -webkit-text-size-adjust: none
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: "roboto";
+    font-size: 13px
+}
+
+table {
+    border-collapse: collapse;
+    border: 0;
+    font-family: "roboto"
+}
+
+table td,
+table th {
+    vertical-align: top;
+    padding: 10px;
+    text-align: left
+}
+
+p {
+    margin: 0;
+    width: 100%;
+    float: left;
+    line-height: 1.5
+}
+
+table.table_perform {
+    border-collapse: separate;
+    border-spacing: 2px
+}
+
+table.table_perform tr td {
+    background: #fff
+}
+
+.table_perform th {
+    font-size: 13px;
+    padding: 10px 7px
+}
+
+table.table_perform th img {
+    width: 15px;
+    vertical-align: middle;
+    margin-right: 4px;
+    float: left;
+    margin-bottom: 10px
+}
+
+table.table_transfer {
+    border-collapse: separate;
+    border-spacing: 2px
+}
+
+table.table_transfer tr td {
+    background: #fff
+}
+
+table.table_transfer th img {
+    width: 15px;
+    vertical-align: middle;
+    margin-right: 4px;
+    float: left
+}
+
+table.table_transfer td img {
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -2px
+}
+
+.transfer_history {
+    width: 100%;
+    background: #f8f8f8;
+    padding: 12px;
+    margin-top: 15px
+}
+
+.performance_data {
+    width: 100%;
+    background: #f8f8f8;
+    padding: 12px;
+    margin-top: 15px
+}
+
+.court_position .ground_fix {
+    width: 100%
+}
+
+.currnt_club {
+    width: 100%;
+    float: left;
+    margin-top: 8px
+}
+
+.currnt_club img {
+    width: 35px;
+    vertical-align: middle;
+    margin-right: 5px
+}
+
+.currnt_size {
+    width: 100%;
+    float: left;
+    margin-top: 8px
+}
+
+.currnt_size img {
+    width: 25px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -4px
+}
+
+.h_width {
+    width: 120px;
+    float: left
+}
+
+.bnr_img {
+    width: 80%;
+    margin-left: 0;
+    margin-top: 15px;
+    position: relative;
+    z-index: -1
+}
+
+.social_links {
+    width: 160px;
+    float: right;
+    font-size: 13px
+}
+
+.scl_hdr {
+    width: 100%;
+    float: left;
+    margin-bottom: 8px
+}
+
+.scl_hdr img {
+    width: 22px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: -3px
+}
+
+table.player_detail td.detail_list .dl_item {
+    width: 100%;
+    float: left
+}
+
+table.player_detail td.detail_list .dl_item .dl_text {
+    width: 100%;
+    float: left;
+    margin-top: 8px
+}
+
+table.player_detail td.detail_list .dl_item .dl_text img {
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px
+}
+
+table.player_detail td.detail_list {
+    width: 33.33%;
+    border-bottom: 1px solid #fff;
+    padding: 10px 0
+}
+
+table.player_detail {
+    border-collapse: separate;
+    border-spacing: 10px
+}
+
+table.player_detail td.detail_list.no_border {
+    border: 0
+}
+
+.right_div {
+    width: 100%;
+    float: left
+}
+
+.court_position {
+    width: 100%;
+    float: left;
+    position: relative;
+    margin-top: 10px
+}
+
+.plyr_pos {
+    width: 100%;
+    float: left
+}
+
+.plyr_pos .ppos_data {
+    width: 130px;
+    margin-top: 10px
+}
+
+.dot_positions {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%
+}
+
+.dot_positions img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    position: absolute
+}
+
+img.pos_st {
+    left: 50%;
+    top: 5px;
+    transform: translateX(-50%)
+}
+
+img.pos_cam {
+    left: 50%;
+    top: 34px;
+    transform: translateX(-50%)
+}
+
+img.pos_cm {
+    left: 50%;
+    top: 53px;
+    transform: translateX(-50%)
+}
+
+img.pos_lm {
+    left: 33%;
+    top: 29px
+}
+
+img.pos_rm {
+    right: 33%;
+    top: 29px
+}
+
+img.pos_cdm {
+    left: 50%;
+    top: 73px;
+    transform: translateX(-50%)
+}
+
+img.pos_lwb {
+    left: 27%;
+    top: 80px
+}
+
+img.pos_lb {
+    left: 34%;
+    top: 101px
+}
+
+img.pos_rb {
+    right: 34%;
+    top: 101px
+}
+
+img.pos_rwb {
+    right: 27%;
+    top: 80px
+}
+
+img.pos_gk {
+    left: 50%;
+    top: 133px;
+    transform: translateX(-50%)
+}

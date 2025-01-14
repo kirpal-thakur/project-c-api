@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="24" viewBox="0 0 30 24">
+  <defs>
+    <clipPath id="clip-Switzerland_">
+      <rect width="30" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Switzerland_" data-name="Switzerland " clip-path="url(#clip-Switzerland_)">
+    <rect width="30" height="24" fill="#fff"/>
+    <g id="Flag_of_Switzerland__Pantone_" data-name="Flag_of_Switzerland_(Pantone)" transform="translate(0 -3)">
+      <path id="Path_6613" data-name="Path 6613" d="M0,0H30V30H0Z" fill="#da291c"/>
+      <path id="Path_6614" data-name="Path 6614" d="M12.562,6h5.625v6.562H24.75v5.625H18.188V24.75H12.562V18.188H6V12.562h6.562Z" transform="translate(-0.375 -0.375)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

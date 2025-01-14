@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="24" viewBox="0 0 30 24">
+  <defs>
+    <clipPath id="clip-Bahrain">
+      <rect width="30" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Bahrain" clip-path="url(#clip-Bahrain)">
+    <rect width="30" height="24" fill="#fff"/>
+    <g id="Group_6" data-name="Group 6" transform="translate(4682.795 153.335)">
+      <path id="path4084" d="M372.2-3346.7h36.064v-24.042H372.2v24.042" transform="translate(-5058 3217.403)" fill="#fff" fill-rule="evenodd"/>
+      <path id="path4086" d="M428.9-3370.738l5.41,2.4-5.41,2.4,5.41,2.4-5.41,2.4,5.41,2.4-5.41,2.4,5.41,2.4-5.41,2.4,5.41,2.4-5.41,2.4h27.048v-24.042H428.9" transform="translate(-5105.676 3217.403)" fill="#f30004" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

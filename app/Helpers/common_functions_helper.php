@@ -617,7 +617,6 @@ function getPlayersOnFrontend($whereClause = [], $metaQuery = [], $search = '', 
     //     echo '>>>>>>>>>>>>> auth()->id >>>>>>>>>>>>' . auth()->id(); exit('>>>> user >>>>');
     //     // $builder->select('us.target_role as target_role');
     // }
-
     // Start building the main query
     $builder = $db->table('users');
     $builder->select('users.*, 
@@ -663,6 +662,7 @@ function getPlayersOnFrontend($whereClause = [], $metaQuery = [], $search = '', 
     $builder->join('auth_identities auth', 'auth.user_id = users.id AND  auth.type = "email_password"', 'LEFT');
     $builder->join('user_roles', 'user_roles.id = users.role', 'INNER');
     $builder->join('languages', 'languages.id = users.lang', 'INNER');
+
     $builder->join('domains', 'domains.id = users.user_domain', 'INNER');
     $builder->join('user_nationalities un', 'un.user_id = users.id', 'LEFT');
     $builder->join('countries c', 'c.id = un.country_id', 'LEFT');
@@ -891,8 +891,7 @@ function getPlayersOnFrontend($whereClause = [], $metaQuery = [], $search = '', 
     //  echo '>>>>>>>>>>>>>>>>>> getLastQuery >>> ' . $db->getLastQuery(); //exit;
 
     $result = $query->getResultArray();
-    // pr($result);
-
+  
     // Process the results to merge metadata into user objects
     $users = [];
 
@@ -931,10 +930,13 @@ function getPlayersOnFrontend($whereClause = [], $metaQuery = [], $search = '', 
     $userIds = array_keys($users);
     if (!empty($userIds)) {
         $metaBuilder = $db->table('user_meta');
+        $metaBuilder->select('user_meta.*, cb.club_name, cb.club_logo');
         $metaBuilder->whereIn('user_id', $userIds);
+        $metaBuilder->join('clubs cb', 'cb.id = user_meta.meta_value  AND user_meta.meta_key = "pre_club_id"', 'LEFT');
+        
         $metaQuery = $metaBuilder->get();
-        $metaResult = $metaQuery->getResultArray();
 
+        $metaResult = $metaQuery->getResultArray();
         foreach ($metaResult as $metaRow) {
             $userId = $metaRow['user_id'];
             $users[$userId]['meta'][$metaRow['meta_key']] = $metaRow['meta_value'];
@@ -943,6 +945,10 @@ function getPlayersOnFrontend($whereClause = [], $metaQuery = [], $search = '', 
             }
             if ($metaRow['meta_key'] == 'cover_image') {
                 $users[$userId]['meta']['cover_image_path'] = $imagePath . $metaRow['meta_value'];
+            }
+            if ($metaRow['meta_key'] == 'pre_club_id') {
+                $users[$userId]['meta']['club_name'] =  $metaRow['club_name'];
+                $users[$userId]['meta']['club_logo'] = $imagePath . $metaRow['club_logo'];
             }
         }
     }

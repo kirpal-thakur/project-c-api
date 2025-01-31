@@ -142,7 +142,7 @@
     <title>Soccer You</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="https://api.socceryou.ch/public/assets/css/user-profile-pdf.css?<= rand(); ?>"> -->
+    <!-- <link rel="stylesheet" href="https://apitest.socceryou.ch/public/assets/css/user-profile-pdf.css?<= rand(); ?>"> -->
 </head>
 
 <body>

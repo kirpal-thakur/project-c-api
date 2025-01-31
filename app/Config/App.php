@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'https://api.socceryou.ch/';
+    public string $baseURL = 'https://apitest.socceryou.ch/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

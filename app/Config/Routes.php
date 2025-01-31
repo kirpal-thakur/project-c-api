@@ -78,7 +78,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
    // $routes->post('stripe-webhook', 'StripeController::handle_new');
    // $routes->get('process-stripe-webhook', 'StripeController::processPendingEventsLater');
    $routes->get('process-stripe-webhook', 'StripeWebhookEventController::processPendingEventsLater');
-   
+
    $routes->post('create-stripe-customer', 'StripeController::createStripeCustomer', ['filter' => 'loginAuth']);
 
 
@@ -106,7 +106,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
    $routes->post('delete-activity',           'UserController::deleteActivity', ['filter' => 'loginAuth']);
    $routes->get('get-subscription',           'UserSubscriptionController::getSubscriptionPlans'); //
    $routes->post('common-profile-upload',     'UserController::UploadProfileImageCommon');
-   // 
+   //
    $routes->get('admin-access',           'AuthController::adminAccessDenied');
    $routes->get('player-access',          'AuthController::playerAccessDenied');
    $routes->get('club-access',            'AuthController::clubAccessDenied');
@@ -118,7 +118,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
 
    $routes->get('get-domains',            'DomainController::getDomains');
    $routes->get('get-currencies',         'DomainController::getCurrencies');
-   
+
    $routes->get('get-roles',              'RoleController::getRoles');
    $routes->get('get-languages',          'LanguageController::getLanguages');
    $routes->get('get-language/(:num)',    'LanguageController::getLanguage/$1');
@@ -192,7 +192,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
    $routes->get('get-gallery/(:num)',                    'GalleryController::getGallery/$1');
    $routes->post('track-advertisement',                  'AdvertisementController::trackAdvertisement', ['filter' => 'loginAuth']);
    $routes->get('user-profile/(:num)',                   'UserController::userProfile/$1');
-   
+
 
 
    $routes->group('admin', ['filter' => ['loginAuth', 'adminAuth']], function ($routes) {
@@ -389,7 +389,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
 
       $routes->get('get-profile-image',            'UserController::getProfileImage');
       $routes->get('get-cover-image',              'UserController::getCoverImage');
-      
+
       $routes->get('delete-profile-image',         'UserController::deleteProfileImage');
       $routes->get('delete-cover-image',           'UserController::deleteCoverImage');
 
@@ -500,11 +500,10 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
    $routes->group('scout', ['filter' => ['loginAuth', 'scoutAuth']], function ($routes) {
 
       $routes->get('get-company-history',                'UserController::getCompanyHistory');
-      $routes->post('add-company-history',               'UserController::addCompanyHistory');
       $routes->post('edit-company-history',              'UserController::editCompanyHistory');
 
       // $routes->post('add-scout-player',                  'ClubPlayerController::addScoutPlayer');
-      // $routes->get('get-scout-players',                  'ClubPlayerController::getScoutPlayers');   
+      // $routes->get('get-scout-players',                  'ClubPlayerController::getScoutPlayers');
       // $routes->get('delete-scout-player/(:num)',         'ClubPlayerController::deleteScoutPlayer/$1');
 
       $routes->post('add-scout-player',                  'ScoutPlayerController::addScoutPlayer');
@@ -628,6 +627,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
       // });
 
    }); */
+
+
+   // scoutAuth By Neeraj
+   $routes->group('scout', ['filter' => ['loginAuth', 'scoutAuth']], function ($routes) {
+      $routes->post('add-company-history',               'UserController::addCompanyHistory');
+   });
 });
 
 $routes->group('frontend', ['namespace' => 'App\Controllers\Frontend'], function ($routes) {
@@ -664,7 +669,7 @@ $routes->group('frontend', ['namespace' => 'App\Controllers\Frontend'], function
    // $routes->get('get-frontend-pages/(:num)', 'PageMetaController::getFrontendData/$1');
    $routes->get('get-frontend-pages',       'PageMetaController::getFrontendPages');
    $routes->get('get-single-news/(:num)',       'PageMetaController::getSingleNews/$1');
-   
+
    ##### End New Routes #####
    // $routes->post('save-homepage', 'PageMetaController::homePageMetaData');
    // $routes->post('save-talentpage', 'PageMetaController::talentPageMetaData');

@@ -387,7 +387,7 @@ class Home extends BaseController
             if (!empty($userData['club_logo_path'])) {
                 $club_logo_path = $userData['club_logo_path'];
             } else {
-                $club_logo_path = 'https://api.socceryou.ch/no-img.png';
+                $club_logo_path = 'https://apitest.socceryou.ch/no-img.png';
             }
             $clubLogo = get_headers($club_logo_path, 1);
             if (strpos($clubLogo[0], '200') !== false) {

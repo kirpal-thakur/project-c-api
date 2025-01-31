@@ -232,8 +232,8 @@ class ClubPlayerController extends ResourceController
 
                             $activity_data = [
                                 'user_id'               => auth()->id(),
-                                'activity_on_id'        => $player["player_id"]
-                                'activity_type_id'      => 1,      // created 
+                                'activity_on_id'        => $player["player_id"],
+                                'activity_type_id'      => 1,      // created
                                 'activity'              => 'added player in club',
                                 'activity_en'           => 'added player in club',
                                 'activity_de'           => 'neuer Spieler im Verein',
@@ -320,7 +320,7 @@ class ClubPlayerController extends ResourceController
                     $activity_data = [
                         'user_id'               => auth()->id(),
                         'activity_on_id'        => $isExist['player_id'] ?? 0,
-                        'activity_type_id'      => 2,      // updated 
+                        'activity_type_id'      => 2,      // updated
                         'activity'              => 'updated club player detail',
                         'activity_en'           => 'updated club player detail',
                         'activity_de'           => 'aktualisierte Vereinsspielerdetails',
@@ -510,8 +510,6 @@ class ClubPlayerController extends ResourceController
         $query = $this->db->query($sql);
         $playersDetail = $query->getResult();
 
-        //echo '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> getLastQuery >>>>>>> ' . $this->db->getLastQuery();
-
         if ($playersDetail) {
             $response = [
                 "status"    => true,
@@ -554,7 +552,7 @@ class ClubPlayerController extends ResourceController
                 // create Activity log
                 $activity_data = [
                     'user_id'               => $userId,
-                    'activity_type_id'      => 3,      // deleted 
+                    'activity_type_id'      => 3,      // deleted
                     'activity'              => 'deleted Club player',
                     'activity_en'           => 'deleted Club player',
                     'activity_de'           => 'gelöscht Clubspieler',

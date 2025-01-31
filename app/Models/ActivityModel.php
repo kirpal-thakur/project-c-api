@@ -88,9 +88,9 @@ class ActivityModel extends Model
                        ->findAll();
     }
     # Modified by Amrit: 
-    # Updated function to properly handle user activity queries with 'You are' set for the user, 
+    # Updated function to properly handle user activity queries with 'You are' set for the user,
     # and the user's name is now displayed for admin to view all user activities.
-    public function getActivities($userId, $limit = 100, $offset = 0, $userlang = ''){ 
+    public function getActivities($userId, $limit = 100, $offset = 0, $userlang = ''){
         // $limit = 10000;
         if(empty($userlang)){
             $activity_type = 'al.activity_en';
@@ -121,9 +121,8 @@ class ActivityModel extends Model
         $userModel = new UserModel();
         // echo $userId; die;
         // Use the model to find the user by ID
-        
         if(!empty($results)){
-            // echo '<pre>'; print_r($results); die;
+
             foreach($results  as $obj_key => $result){
                 $string = $result->activity;
                 if (preg_match('/\[USER_NAME_(\d+)\]/', $string, $matches)) {
@@ -203,6 +202,7 @@ class ActivityModel extends Model
         return $modifiedArr;
 
     }
+
     // Function to get total count for pagination
     public function getActivityCount($userId, $search = '')
     {

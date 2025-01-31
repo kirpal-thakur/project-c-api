@@ -175,10 +175,10 @@ class ScoutPlayerController extends ResourceController
         $logoPath = base_url() . 'uploads/logos/';
 
         $scoutPlayers = $this->scoutPlayerModel
-            ->select('scout_players.*, 
+            ->select('scout_players.*,
                                     u.first_name,
                                     u.last_name,
-                                    u.status as user_status, 
+                                    u.status as user_status,
                                     l.language, 
                                     CONCAT("' . $imagePath . '", um.meta_value) AS profile_image_path,
 
@@ -435,7 +435,7 @@ class ScoutPlayerController extends ResourceController
                                         '{faqLink}'         => '<a href="'.getPageInUserLanguage($currentScoutInfo->user_domain, $currentScoutInfo->lang, "faq").'">faq</a>',
                                         '{helpEmail}'       => '<a href="mailto:help@socceryou.ch">help@socceryou.ch</a>',
                                     ];
-        
+
                                     $subjectReplacements = [
                                         '{talentName}' => auth()->user()->first_name,
                                     ];
@@ -445,7 +445,7 @@ class ScoutPlayerController extends ResourceController
                                     $content = strtr($getEmailTemplate['content'], $replacements);
                                     $message = view('emailTemplateView' , ['message' => $content, 'disclaimerText' => getEmailDisclaimer($currentScoutInfo->lang), 'footer' => getEmailFooter($currentScoutInfo->lang)]);
         
-                                    $toEmail = $currentScoutInfo->email;        
+                                    $toEmail = $currentScoutInfo->email;
                                     $emailData = [
                                         'fromEmail'     => FROM_EMAIL,
                                         'fromName'      => FROM_NAME,
@@ -530,7 +530,7 @@ class ScoutPlayerController extends ResourceController
         $logoPath = base_url() . 'uploads/logos/';
 
         $scoutPlayers = $this->scoutPlayerModel
-            ->select('scout_players.*, 
+            ->select('scout_players.*,
                                     u.first_name,
                                     u.last_name,
                                     u.status as user_status, 

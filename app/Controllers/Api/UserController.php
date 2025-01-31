@@ -60,12 +60,12 @@ class UserController extends ResourceController
 
         // if (auth()->user()->inGroup('superadmin', 'superadmin-representator') && (auth()->user()->can('admin.access') || auth()->user()->can('admin.edit') || auth()->user()->can('transfer.ownership'))) {
 
-        // if(auth()->user()->inGroup('player') || 
-        //     auth()->user()->inGroup('club') || 
+        // if(auth()->user()->inGroup('player') ||
+        //     auth()->user()->inGroup('club') ||
         //     auth()->user()->inGroup('scout') ||
         //     (auth()->user()->inGroup('superadmin') && auth()->user()->can('admin.access')) ||
         //     (auth()->user()->inGroup('superadmin-representator') && (auth()->user()->can('admin.access') || auth()->user()->can('admin.edit') || auth()->user()->can('transfer.ownership') ))
-        //     ){  
+        //     ){
 
         if (hasAccess(auth()->user(), ADMIN_ACCESS) || hasAccess(auth()->user(), TRANSFER_OWNERSHIP) || hasAccess(auth()->user(), EDITOR_ACCESS)) {
             if ($this->request->getVar('user') && count($this->request->getVar('user')) > 0) {
@@ -99,7 +99,7 @@ class UserController extends ResourceController
                             if ($addCountries) {
                                 foreach ($addCountries as $country) {
 
-                                    //  check if new Nationality exists 
+                                    //  check if new Nationality exists
                                     $natExist = $this->userNationalityModel
                                         ->where('user_id', $user_id)
                                         ->where('country_id', $country)
@@ -385,10 +385,10 @@ class UserController extends ResourceController
                     //     $birthInfo_data['meta_key'] = 'birth_country_flag';
                     //     $birthInfo_data['meta_value'] = $birth_country_logo;
                     // }
-                    
+
                     // save data
                     // $res = $userMetaObject->save($save_data);
-                    if ($userMetaObject->save($save_data)) { 
+                    if ($userMetaObject->save($save_data)) {
                         $response = [
                             "status"    => true,
                             "message"   => lang('App.profile_updatedSuccess'),
@@ -440,7 +440,7 @@ class UserController extends ResourceController
         return $this->respondCreated($response);
     }
 
-    // to update general information logged-in player 
+    // to update general information logged-in player
     // post
     public function updateGeneralInfo()
     {
@@ -555,7 +555,7 @@ class UserController extends ResourceController
                 // save data
                 $res = $userMetaObject->save($save_data);
             }
-            if ($res) { 
+            if ($res) {
                 $activityMsg = [
                     'en' => ' updated General Details.',
                     'de' => ' hat die allgemeinen Daten aktualisiert.',
@@ -631,7 +631,7 @@ class UserController extends ResourceController
                         $emailType = 'Admin Deleted Users Account';
                         $getEmailTemplate = $emailTemplateModel->where('type', $emailType)
                             ->where('language', $user->lang)
-                            // ->where('language', 2)           
+                            // ->where('language', 2)
                             ->whereIn('email_for', [0])
                             ->first();
 
@@ -747,7 +747,7 @@ class UserController extends ResourceController
                 if ($getEmailTemplate) {
 
                     $language = \Config\Services::language();
-                    $language->setLocale(getLanguageCode($user->lang)); 
+                    $language->setLocale(getLanguageCode($user->lang));
 
                     $replacements = [
                         '{firstName}'   => $user->first_name,
@@ -778,7 +778,7 @@ class UserController extends ResourceController
                 //     ->where('language', 2)
                 //     ->whereIn('email_for', ADMIN_ROLES)
                 //     ->first();
-                
+
                 $getAdminEmailTemplate = getEmailTemplate($adminEmailType, 2, ADMIN_ROLES);
 
 
@@ -1056,13 +1056,13 @@ class UserController extends ResourceController
                                 if ($club_data) {
                                     $this->clubModel->save([
                                         'id'        => $club_data['meta_value'],
-                                        'is_taken'  => 1,   // yes 
+                                        'is_taken'  => 1,   // yes
                                         'taken_by'  => $id
                                     ]);
                                 }
                             }
 
-                            //1 = 'Pending' 2 = 'Verified' 3 = 'Rejected'	
+                            //1 = 'Pending' 2 = 'Verified' 3 = 'Rejected'
                             $keywordTranslations = array();
                             if ($this->request->getVar("status") == 2) {
                                 $activityStatus = 'Verified';
@@ -1118,7 +1118,7 @@ class UserController extends ResourceController
                             // $userRole = [$user->role];
                             // $getEmailTemplate = $emailTemplateModel->where('type', $emailType)
                             //     ->where('language', $user->lang)
-                            //     // ->where('language', 2)           
+                            //     // ->where('language', 2)
                             //     ->whereIn('email_for', $userRole)
                             //     ->first();
 
@@ -1140,7 +1140,7 @@ class UserController extends ResourceController
                                 // Replace placeholders with actual values in the email body
                                 $content = strtr($getEmailTemplate['content'], $replacements);
                                 $message = view('emailTemplateView', ['message' => $content, 'disclaimerText' => getEmailDisclaimer($user->lang), 'footer' => getEmailFooter($user->lang)]);
-                                
+
                                 $toEmail = $user->email;
                                 // $toEmail = 'pratibhaprajapati.cts@gmail.com';
                                 $emailData = [
@@ -1268,7 +1268,7 @@ class UserController extends ResourceController
             $is_uploaded = removeImageBG($this->request->getFile('profile_image'));
             //$profile_image = $this->request->getFile('profile_image');        // old code
 
-            //if (! $profile_image->hasMoved()) {       // old code 
+            //if (! $profile_image->hasMoved()) {       // old code
             if ($is_uploaded && $is_uploaded['status'] == "success") {
 
                 //$filepath = WRITEPATH . 'uploads/' . $profile_image->store('');       // old code
@@ -2072,7 +2072,7 @@ class UserController extends ResourceController
         $builder = $this->db->table('users u');
 
         $builder->select('
-                    u.*, 
+                    u.*,
                     user_roles.role_name as role_name,
                     languages.language as language,
                     domains.domain_name as user_domain,
@@ -2080,11 +2080,11 @@ class UserController extends ResourceController
                     auth.secret as email,
                     apu.permission as permission,
 
-                    (SELECT 
+                    (SELECT
                         JSON_OBJECTAGG(
-                                um.meta_key, um.meta_value 
+                                um.meta_key, um.meta_value
                         )
-                        FROM user_meta um 
+                        FROM user_meta um
                         WHERE um.user_id = u.id
                     ) AS meta
                 ');
@@ -2099,10 +2099,10 @@ class UserController extends ResourceController
         $builder->where('u.deleted_at IS NULL');
         $builder->where('u.parent_id', $adminId);
         // $builder->orWhere('u.id', $adminId);
-        $builder->orderBy(' 
-                CASE 
-                    WHEN u.parent_id IS NULL THEN 1 
-                    ELSE 2 
+        $builder->orderBy('
+                CASE
+                    WHEN u.parent_id IS NULL THEN 1
+                    ELSE 2
                 END
             ', '', false);
 
@@ -2176,7 +2176,7 @@ class UserController extends ResourceController
         $flagPath =  base_url() . 'uploads/logos/';
 
         $builder = $this->db->table('users');
-        $builder->select('users.*, 
+        $builder->select('users.*,
                             user_roles.role_name as role_name,
                             languages.language as language,
                             domains.domain_name as user_domain,
@@ -2190,19 +2190,19 @@ class UserController extends ResourceController
                             us.plan_period_start as plan_period_start,
                             us.plan_period_end as plan_period_end,
                             us.plan_interval as plan_interval,
-                            us.coupon_used as coupon_used, 
-                            
+                            us.coupon_used as coupon_used,
+
                             (SELECT JSON_ARRAYAGG(
                                 JSON_OBJECT(
-                                    "country_id", c.id, 
-                                    "country_name", c.country_name, 
+                                    "country_id", c.id,
+                                    "country_name", c.country_name,
                                     "flag_path", CONCAT("' . $flagPath . '", c.country_flag)
                                 )
                             )
-                            FROM user_nationalities un 
-                            LEFT JOIN countries c ON c.id = un.country_id 
+                            FROM user_nationalities un
+                            LEFT JOIN countries c ON c.id = un.country_id
                             WHERE un.user_id = users.id) AS user_nationalities,
-                            
+
                             t.id as team_id,
                             t.team_type as team_type,
                             um2.meta_value as current_club_name,
@@ -2212,15 +2212,15 @@ class UserController extends ResourceController
                             l.league_name as league_name,
                             l.league_logo as league_logo,
                             CONCAT("' . $flagPath . '", l.league_logo) as league_logo_path,
-                            
+
                             c1.id as int_player_country_id,
                             c1.country_name as int_player_country,
                             CONCAT("' . $flagPath . '", c1.country_flag) as int_player_country_logo_path,
-                           
+
                             (SELECT JSON_ARRAYAGG(
                                     JSON_OBJECT(
                                         "position_id", pp.position_id ,
-                                        "main_position", pp.is_main, 
+                                        "main_position", pp.is_main,
                                         "position_name", p.position
                                     )
                                 )
@@ -2239,14 +2239,14 @@ class UserController extends ResourceController
         //     (SELECT JSON_ARRAYAGG(
         //         JSON_OBJECT(
         //             "package_name", p.title ,
-        //             "interval", pd.interval, 
+        //             "interval", pd.interval,
         //             "stripe_subscription_id", us.stripe_subscription_id
         //         )
         //     )
         //     FROM user_subscriptions us
         //     INNER JOIN package_details pd ON pd.id = us.package_id
         //     INNER JOIN packages p ON p.id = pd.id
-        //     WHERE us.user_id = users.id 
+        //     WHERE us.user_id = users.id
         //     AND us.status = "active"
         // ) As active_subscriptions,
 
@@ -2309,7 +2309,7 @@ class UserController extends ResourceController
 
         if ($userData) {
 
-            // get user subscriptions details 
+            // get user subscriptions details
             $userSubscriptionController = new UserSubscriptionController();
             $getActivePackages = $userSubscriptionController->getUserActivePackages($id);
             $userData->active_subscriptions = $getActivePackages;
@@ -2445,7 +2445,7 @@ class UserController extends ResourceController
         return $this->respondCreated($response);
     }
 
-    // to update general information of user by admin 
+    // to update general information of user by admin
     // post
     public function updateGeneralInfoAdmin($id = null)
     {
@@ -2492,7 +2492,7 @@ class UserController extends ResourceController
         return $this->respondCreated($response);
     }
 
-    // to update market value of user by admin 
+    // to update market value of user by admin
     // post
     public function playerMarketValueAdmin($id = null)
     {
@@ -2708,7 +2708,7 @@ class UserController extends ResourceController
                     // $activity_data = [
                     //     'user_id'               => auth()->id(),
                     //     'activity_on_id'        => $userId,
-                    //     'activity_type_id'      => 3,      // deleted 
+                    //     'activity_type_id'      => 3,      // deleted
                     //     'activity'              => $activity,
                     //     'ip'                    => $this->request->getIPAddress()
                     // ];
@@ -2837,7 +2837,7 @@ class UserController extends ResourceController
                 $is_uploaded = removeImageBG($this->request->getFile('profile_image'));
                 //$profile_image = $this->request->getFile('profile_image');        // old code
 
-                //if (! $profile_image->hasMoved()) {       // old code 
+                //if (! $profile_image->hasMoved()) {       // old code
                 if ($is_uploaded && $is_uploaded['status'] == "success") {
 
                     //$filepath = WRITEPATH . 'uploads/' . $profile_image->store('');       // old code
@@ -2865,7 +2865,7 @@ class UserController extends ResourceController
                     // $activity_data = [
                     //     'user_id'               => auth()->id(),
                     //     'activity_on_id'        => $userId,
-                    //     'activity_type_id'      => 2,      // updated 
+                    //     'activity_type_id'      => 2,      // updated
                     //     'activity'              => $activity,
                     //     'ip'                    => $this->request->getIPAddress()
                     // ];
@@ -2942,7 +2942,7 @@ class UserController extends ResourceController
                     // $activity_data = [
                     //     'user_id'               => auth()->id(),
                     //     'activity_on_id'        => $userId,
-                    //     'activity_type_id'      => 3,      // deleted 
+                    //     'activity_type_id'      => 3,      // deleted
                     //     'activity'              => $activity,
                     //     'ip'                    => $this->request->getIPAddress()
                     // ];
@@ -3139,7 +3139,7 @@ class UserController extends ResourceController
         return $this->respondCreated($response);
     }
 
-    // Club - update Club History 
+    // Club - update Club History
     public function updateClubHistory($id = null)
     {
 
@@ -3417,12 +3417,14 @@ class UserController extends ResourceController
             } else {
 
                 $companyHistory = $userMetaObject->where('user_id', $userID)->where('meta_key', 'company_history')->first();
-                if (!$companyHistory) {
 
-                    $save_data = [
-                        'meta_key'      => 'company_history',
-                        'meta_value'    => $this->request->getVar("company_history"),
-                    ];
+                $save_data = [
+                    'user_id'       => $userID,
+                    'meta_key'      => 'company_history',
+                    'meta_value'    => $this->request->getVar("company_history"),
+                ];
+
+                if (!$companyHistory) {
 
                     // save data
                     if ($userMetaObject->save($save_data)) {
@@ -3464,12 +3466,39 @@ class UserController extends ResourceController
                             "data"      => []
                         ];
                     }
+
                 } else {
-                    $response = [
-                        "status"    => false,
-                        "message"   => lang('App.recordExist'),
-                        "data"      => []
-                    ];
+
+                    // Update existing record
+                    if ($userMetaObject->update($companyHistory['id'], $save_data)) {
+
+                        $activity_data = array();
+                        $languageService = \Config\Services::language();
+                        $languages = ['en', 'de', 'fr', 'it', 'es', 'pt', 'da', 'sv'];
+                        $activity_data = [
+                            'user_id'               => auth()->id(),
+                            'activity_type_id'      => 1,      // updated
+                            'ip'                    => $this->request->getIPAddress()
+                        ];
+                        foreach ($languages as $lang) {
+                            $languageService->setLocale($lang);
+                            $translated_message = lang('App.added_company_history');
+                            $activity_data['activity_' . $lang] = $translated_message;
+                        }
+                        createActivityLog($activity_data);
+
+                        $response = [
+                            "status"    => true,
+                            "message"   => lang('App.companyHistoryAdded'),
+                            "data"      => []
+                        ];
+                    } else {
+                        $response = [
+                            "status"    => false,
+                            "message"   => lang('App.companyHistoryAddFailed'),
+                            "data"      => []
+                        ];
+                    }
                 }
             }
         } else {
@@ -3588,7 +3617,7 @@ class UserController extends ResourceController
             if( $domain_id != null){
                 $userDataSubquery->where('user_domain', $domain_id);
             }
-            
+
             $userDataSubquery->where('YEAR(created_at)', $year)
             ->groupBy('MONTH(created_at)')
             ->getCompiledSelect(); */
@@ -4310,7 +4339,7 @@ class UserController extends ResourceController
         $builder->where('u.id', $userId);
         $query = $builder->get();
         $userInfo = $query->getRow();
-    
+
     } */
     // export CSV
     public function exportUsers()
@@ -4326,7 +4355,7 @@ class UserController extends ResourceController
         $userId = auth()->id(); // Assuming this fetches the current user's ID
         $userlang = userCurrentLang($userId);
         $ActivityModel = new ActivityModel();
-        // $userlang = 
+        // $userlang =
         // Fetch query parameters
         $url =  isset($_SERVER['HTTPS']) &&
             $_SERVER['HTTPS'] === 'on' ? "https://" : "http://";
@@ -4435,7 +4464,7 @@ class UserController extends ResourceController
         $currentLang = $this->request->getVar("lang") ?? DEFAULT_LANGUAGE;
         $this->request->setLocale(getLanguageCode($currentLang));
 
-        $userId = auth()->id(); 
+        $userId = auth()->id();
         // $userId = '58';
         $validationRule = [
             'profile_image' => [
@@ -4450,7 +4479,7 @@ class UserController extends ResourceController
                 'errors' => [
                     'uploaded'  => lang('App.uploaded', ['file' => 'jpg, jpeg, gif, png, webp']),
                     'is_image'  => lang('App.is_image', ['file' => 'jpg, jpeg, gif, png, webp']),
-                    'mime_in'   => lang('App.mime_in', ['file' => 'jpg, jpeg, gif, png, webp']),                    
+                    'mime_in'   => lang('App.mime_in', ['file' => 'jpg, jpeg, gif, png, webp']),
                     'max_size'  => lang('App.max_size', ['siz' => '1000']),
                     'max_dims'  => lang('App.max_dims'),
                 ],
@@ -4470,7 +4499,7 @@ class UserController extends ResourceController
             // $is_uploaded = removeImageBG($this->request->getFile('profile_image'));
             $profile_image = $this->request->getFile('profile_image');        // old code
 
-            if (! $profile_image->hasMoved()) {       // old code 
+            if (! $profile_image->hasMoved()) {       // old code
             // if($is_uploaded && $is_uploaded['status'] == "success"){
 
                 //$filepath = WRITEPATH . 'uploads/' . $profile_image->store('');       // old code
@@ -4491,7 +4520,7 @@ class UserController extends ResourceController
                 // $save_data['meta_value'] = $is_uploaded['fileName'];
                 // save data
                 $res = $userMetaObject->save($save_data);
-                
+
                 $data = ['uploaded_fileinfo' => $profile_image->getName()];        // old Code
                 // $data = ['uploaded_fileinfo' => $is_uploaded['fileName'] ];
 
@@ -4529,7 +4558,7 @@ class UserController extends ResourceController
         $currentLang = $this->request->getVar("lang") ?? DEFAULT_LANGUAGE;
         $this->request->setLocale(getLanguageCode($currentLang));
 
-        //$userId = auth()->id(); 
+        //$userId = auth()->id();
         // $userId = '58';
         $validationRule = [
             'profile_image' => [
@@ -4564,7 +4593,7 @@ class UserController extends ResourceController
             // $is_uploaded = removeImageBG($this->request->getFile('profile_image'));
             $profile_image = $this->request->getFile('profile_image');        // old code
 
-            if (! $profile_image->hasMoved()) {       // old code 
+            if (! $profile_image->hasMoved()) {       // old code
                 // if($is_uploaded && $is_uploaded['status'] == "success"){
 
                 //$filepath = WRITEPATH . 'uploads/' . $profile_image->store('');       // old code
@@ -4768,14 +4797,14 @@ class UserController extends ResourceController
                 $sheet->setCellValue('H' . $row, htmlspecialchars($membership));
                 $sheet->setCellValue('I' . $row, htmlspecialchars($status));
                 $sheet->setCellValue('J' . $row, htmlspecialchars(isset($user['meta']['profile_image_path']) ? $user['meta']['profile_image_path'] : ''));
-                // $sheet->setCellValue('I' . $row, implode(PHP_EOL,array('amrit','sharma'))); 
+                // $sheet->setCellValue('I' . $row, implode(PHP_EOL,array('amrit','sharma')));
                 // $sheet->getStyle('I' . $row)->getAlignment()->setWrapText(true);
-                // $sheet->getRowDimension($row)->setRowHeight(40); 
+                // $sheet->getRowDimension($row)->setRowHeight(40);
                 $row++;
             }
         }
         // Define the directory to save the file
-        // $saveDirectory = 'uploads/temp_excel';  // Replace with your actual path 
+        // $saveDirectory = 'uploads/temp_excel';  // Replace with your actual path
         $saveDirectory = WRITEPATH  . 'uploads/exports/';
         // $filename = 'users_export_' . date('Y-m-d_H-i-s') . '.xlsx';
 
@@ -4784,7 +4813,7 @@ class UserController extends ResourceController
 
         // Full path of the file
         $filePath = $saveDirectory . $filename;
-        // $fileURL = $ base_url() . '/exports/' . $filename; 
+        // $fileURL = $ base_url() . '/exports/' . $filename;
 
         // Check if the directory exists, if not, create it
         if (!is_dir($saveDirectory)) {
@@ -4910,7 +4939,7 @@ class UserController extends ResourceController
             $mpdf = new \Mpdf\Mpdf($mpdf_data);
             $this->db = \Config\Database::connect();
             $builder = $this->db->table('users');
-            $builder->select('users.*, 
+            $builder->select('users.*,
             user_roles.role_name as role_name,
             languages.language as language,
             domains.domain_name as user_domain,
@@ -4924,17 +4953,17 @@ class UserController extends ResourceController
             us.plan_period_start as plan_period_start,
             us.plan_period_end as plan_period_end,
             us.plan_interval as plan_interval,
-            us.coupon_used as coupon_used, 
+            us.coupon_used as coupon_used,
 
             (SELECT JSON_ARRAYAGG(
                 JSON_OBJECT(
-                    "country_id", c.id, 
-                    "country_name", c.country_name, 
+                    "country_id", c.id,
+                    "country_name", c.country_name,
                     "flag_path", CONCAT("' . $flagPath . '", c.country_flag)
                 )
             )
-            FROM user_nationalities un 
-            LEFT JOIN countries c ON c.id = un.country_id 
+            FROM user_nationalities un
+            LEFT JOIN countries c ON c.id = un.country_id
             WHERE un.user_id = users.id) AS user_nationalities,
 
             t.id as team_id,
@@ -4954,7 +4983,7 @@ class UserController extends ResourceController
             (SELECT JSON_ARRAYAGG(
                     JSON_OBJECT(
                         "position_id", pp.position_id ,
-                        "main_position", pp.is_main, 
+                        "main_position", pp.is_main,
                         "position_name", p.position
                     )
                 )
@@ -5021,7 +5050,7 @@ class UserController extends ResourceController
                 }
                 $userData['meta'] = $meta;
             }
-            // echo '<pre>'; print_r($userData); die; 
+            // echo '<pre>'; print_r($userData); die;
             /* #### Gallery For All #### */
             $galleryModel = new GalleryModel();
             $images = $galleryModel->where('user_id', $userId)->whereIn('file_type', ALLOWED_IMAGE_EXTENTION)->orderBy('id', 'DESC')->findAll();
@@ -5223,7 +5252,7 @@ class UserController extends ResourceController
                     }
                     imagedestroy($image);
                     imagedestroy($croppedImage);
-                    // echo "Image cropped successfully!"; 
+                    // echo "Image cropped successfully!";
                     $imagePath = str_replace(base_url(), '', $imagePath);
                     if (file_exists($imagePath)) {
                         if (unlink($imagePath)) {
@@ -5245,9 +5274,9 @@ class UserController extends ResourceController
                 $performanceDetailModel = new PerformanceDetailModel();
                 $builder = $performanceDetailModel->builder();
                 $builder->select('
-                performance_details.*, 
-                cb.club_name as team_name, 
-                cb.club_logo as team_club_logo, 
+                performance_details.*,
+                cb.club_name as team_name,
+                cb.club_logo as team_club_logo,
                 CONCAT("' . $profilePath . '", cb.club_logo ) AS team_club_logo_path,
                 c.country_name as country_name,
                 c.country_flag as country_flag,
@@ -5270,19 +5299,19 @@ class UserController extends ResourceController
                 $profilePath = base_url() . 'uploads/';
                 $builder = $teamTransferModel->builder();
                 $builder->select('
-                team_transfers.*, 
-            
-                cb1.club_name as team_name_from, 
-                t1.team_type as team_type_from, 
-                cb1.club_logo as team_logo_from, 
+                team_transfers.*,
+
+                cb1.club_name as team_name_from,
+                t1.team_type as team_type_from,
+                cb1.club_logo as team_logo_from,
                 CONCAT("' . $profilePath . '", cb1.club_logo) AS team_logo_path_from,
                 c1.country_name as country_name_from,
                 c1.country_flag as country_flag_from,
                 CONCAT("' . $logoPath . '", c1.country_flag) AS country_flag_path_from,
-            
-                cb2.club_name as team_name_to, 
-                t2.team_type as team_type_to, 
-                cb2.club_logo as team_logo_to, 
+
+                cb2.club_name as team_name_to,
+                t2.team_type as team_type_to,
+                cb2.club_logo as team_logo_to,
                 CONCAT("' . $profilePath . '", cb2.club_logo) AS team_logo_path_to,
                 c2.country_name as country_name_to,
                 c2.country_flag as country_flag_to,
@@ -5360,7 +5389,7 @@ class UserController extends ResourceController
                 } else if (isset($userData['pre_current_club_logo_path']) && !empty($userData['pre_current_club_logo_path'])) {
                     $club_logo_path = $userData['pre_current_club_logo_path'];
                 } else {
-                    $club_logo_path = 'https://api.socceryou.ch/no-img.png';
+                    $club_logo_path = 'https://apitest.socceryou.ch/no-img.png';
                 }
                 $clubLogo = get_headers($club_logo_path, 1);
                 if (strpos($clubLogo[0], '200') !== false) {
@@ -5394,7 +5423,7 @@ class UserController extends ResourceController
                 $content .= '<tr>';
                 $content .= '<td class="social_links">';
                 $content .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
-                // echo '<pre>'; print_r($userData); die; 
+                // echo '<pre>'; print_r($userData); die;
                 if (isset($userData['meta']['sm_x']) && !empty($userData['meta']['sm_x'])) {
                     $sm_x = trim($userData['meta']['sm_x']);
                     $content .= '<tr>';
@@ -5608,7 +5637,7 @@ class UserController extends ResourceController
                         $place_of_birth_logo = $birth_country_logo;
                     }
                     //  else {
-                    //     
+                    //
                     // }
                     //   echo $abc; die;
                     // echo pdfImageExists($birth_country_logo); die;
@@ -5787,7 +5816,7 @@ class UserController extends ResourceController
                     $content .= ' </thead>';
                     $content .= '<tbody>';
                     foreach ($performanceDetail as $performance) {
-                        // team_logo_path	, country_flag_path	
+                        // team_logo_path	, country_flag_path
                         $session = !empty($performance['session']) ? $performance['session'] : '';
                         $teamName = !empty($performance['team_name']) ? $performance['team_name'] : '';
                         $matches = !empty($performance['matches']) ? $performance['matches'] : '';
@@ -5820,7 +5849,7 @@ class UserController extends ResourceController
             /* ##### ~~ End Player PDF ~~ ##### */
 
             /* ##### ~~ Scout PDF ~~ ##### */
-            if (isset($userData['role']) && strtoupper($userData['role']) == '3') { // SCOUT 
+            if (isset($userData['role']) && strtoupper($userData['role']) == '3') { // SCOUT
 
                 $company_name = '-';
                 if (isset($userData['meta']['company_name']) && !empty($userData['meta']['company_name'])) {
@@ -5862,22 +5891,22 @@ class UserController extends ResourceController
                 $pdf_icons = base_url() . 'uploads/pdf-icons/';
                 $this->scoutPlayerModel = new ScoutPlayerModel();
                 $scoutPlayers = $this->scoutPlayerModel
-                    ->select('scout_players.*, 
+                    ->select('scout_players.*,
                                             u.first_name,
                                             u.last_name,
-                                            u.status as user_status, 
-                                            l.language, 
+                                            u.status as user_status,
+                                            l.language,
                                             CONCAT("' . $imagePath . '", um.meta_value) AS profile_image_path,
-        
+
                                             cp.team_id,
                                             cp.end_date as expiry_date,
-        
+
                                             t.team_type,
                                             um2.meta_value AS club_name,
                                             CONCAT("' . $imagePath . '", um3.meta_value) AS club_logo_path,
                                             c.country_name,
                                             CONCAT("' . $logoPath . '", c.country_flag) AS country_flag_path
-        
+
                                         ')
                     ->join('users u', 'u.id = scout_players.player_id', 'INNER')
                     ->join('languages l', 'l.id = u.lang', 'INNER')
@@ -6109,7 +6138,7 @@ class UserController extends ResourceController
                             $status_icon = 'rejected_icon';
                         }
                         $content .= '<tr>';
-                        ##### First TD ##### 
+                        ##### First TD #####
                         $no_user_img = base_url() . 'uploads/pdf-icons/no_pic.png';
                         $pdf_icons_path = base_url() . 'uploads/pdf-icons/';
                         $playerName =  trim($scoutPlayer['first_name']) . ' ' . trim($scoutPlayer['last_name']);
@@ -6142,11 +6171,11 @@ class UserController extends ResourceController
                         $content .=  trim($scoutPlayer['language']);
                         $content .= '</td>';
                         ##### End 2nd TD #####
-                        ##### 3rd TD ##### 
+                        ##### 3rd TD #####
                         $content .= '<td>';
                         // $club_logo_path = get_headers($scoutPlayer['club_logo_path'], 1);
                         if (pdfImageExists($scoutPlayer['club_logo_path'])) {
-                            // $ProfileImg =  $scoutPlayer['profile_image_path']; 
+                            // $ProfileImg =  $scoutPlayer['profile_image_path'];
                             $club_logo = $scoutPlayer['club_logo_path'];
                             $content .= '<img src="' . $club_logo . '" style="width: 20px; vertical-align: middle; margin-right: 5px; margin-top: -2px;">';
                         }
@@ -6157,9 +6186,9 @@ class UserController extends ResourceController
                             $content .= '<img src="' . $country_flag . '" style="width: 20px; vertical-align: middle; margin-right: 5px; margin-top: -2px;">';
                         }
                         $content .= '</td>';
-                        ##### End 3rd TD ##### 
+                        ##### End 3rd TD #####
                         ##### 4th TD #####
-                        ##### End 4th TD ##### 
+                        ##### End 4th TD #####
                         $content .= '</tr>';
                     }
                     // $content .= '';
@@ -6176,9 +6205,9 @@ class UserController extends ResourceController
                 $this->teamModel    = new TeamModel();
                 $teamsQuery = $this->teamModel
                     ->select('
-                        teams.*, 
-                        um.meta_value as team_name, 
-                        um2.meta_value as team_club_logo, 
+                        teams.*,
+                        um.meta_value as team_name,
+                        um2.meta_value as team_club_logo,
                         CONCAT("' . $imagePath . '", um2.meta_value ) AS team_club_logo_path,
                         c.country_name
                     ')
@@ -6199,39 +6228,39 @@ class UserController extends ResourceController
                             $imagePath = base_url() . 'uploads/';
                             $flagPath =  base_url() . 'uploads/logos/';
                             $builder = $this->db->table('club_players cp');
-                            $builder->select('cp.*, 
-                            u.first_name, 
-                            u.last_name, 
-                            u.status as user_status, 
-                            d.location as location, 
+                            $builder->select('cp.*,
+                            u.first_name,
+                            u.last_name,
+                            u.status as user_status,
+                            d.location as location,
                             um2.meta_value as profile_image,
                             CONCAT("' . $imagePath . '", um2.meta_value) AS profile_image_path,
-                            
+
                             (SELECT JSON_ARRAYAGG(
-                            JSON_OBJECT(    
-                                "country_name", c.country_name, 
+                            JSON_OBJECT(
+                                "country_name", c.country_name,
                                 "flag_path", CONCAT("' . $flagPath . '", c.country_flag)
                             )
                             )
-                            FROM user_nationalities un 
-                            LEFT JOIN countries c ON c.id = un.country_id 
+                            FROM user_nationalities un
+                            LEFT JOIN countries c ON c.id = un.country_id
                             WHERE un.user_id = cp.player_id) AS user_nationalities,
-                            
+
                             t.team_type as team_type,
                             um3.meta_value as current_club_name,
                             CONCAT("' . $imagePath . '", um4.meta_value) as club_logo_path,
-                            
+
                             l.league_name as league_name,
                             l.league_logo as league_logo,
                             CONCAT("' . $flagPath . '", l.league_logo) as league_logo_path,
-                            
+
                             c1.country_name as int_player_country,
                             CONCAT("' . $flagPath . '", c1.country_flag) as int_player_country_logo_path,
-                            
+
                             (SELECT JSON_ARRAYAGG(
                                     JSON_OBJECT(
                                         "position_id", pp.position_id ,
-                                        "main_position", pp.is_main, 
+                                        "main_position", pp.is_main,
                                         "position_name", p.position
                                     )
                                 )
@@ -6239,15 +6268,15 @@ class UserController extends ResourceController
                                 LEFT JOIN positions p ON p.id = pp.position_id
                                 WHERE pp.user_id = cp.player_id
                             ) As positions,
-                            
-                            (SELECT 
+
+                            (SELECT
                                 JSON_OBJECTAGG(
-                                        umm.meta_key, umm.meta_value 
+                                        umm.meta_key, umm.meta_value
                                 )
-                                FROM user_meta umm 
+                                FROM user_meta umm
                                 WHERE umm.user_id = cp.player_id
                             ) AS meta
-                            
+
                             ');
 
                             $builder->join('users u', 'u.id = cp.player_id', 'INNER');
@@ -6659,7 +6688,7 @@ class UserController extends ResourceController
                 $mpdf->Output($userPdfPath . $filename, \Mpdf\Output\Destination::FILE);
                 // $activity_data = [
                 //     'user_id'               => 1, // default_admin
-                //     'activity_type_id'      => 10,        //download 	
+                //     'activity_type_id'      => 10,        //download
                 //     'activity'              => $activity,
                 //     'ip'                    => $this->request->getIPAddress()
                 // ];
@@ -6699,14 +6728,14 @@ class UserController extends ResourceController
             } else {
                 $response = [
                     "status"    => false,
-                    "message"   => lang('App.noDataFound'), //lang('App.pdfDownloadFailed'), // 
+                    "message"   => lang('App.noDataFound'), //lang('App.pdfDownloadFailed'), //
                     "data"      => ['error' => $errors]
                 ];
             }
         } else {
             $response = [
                 "status"    => false,
-                "message"   => 'User not Found.', //lang('App.pdfDownloadFailed'), // 
+                "message"   => 'User not Found.', //lang('App.pdfDownloadFailed'), //
                 "data"      => []
             ];
         }
@@ -6745,15 +6774,14 @@ class UserController extends ResourceController
 
             $builder = $this->db->table('users u');
             $builder->select(
-                'u.*, 
-                                user_roles.role_name as role_name,
-                                languages.language as language,
-                                domains.domain_name as domain_name,
-                                domains.location as user_location,
-                                auth.secret as email,
-                                CONCAT("' . $imagePath . '", um.meta_value) as profile_image
-                                ',
-
+                'u.*,
+                user_roles.role_name as role_name,
+                languages.language as language,
+                domains.domain_name as domain_name,
+                domains.location as user_location,
+                auth.secret as email,
+                CONCAT("' . $imagePath . '", um.meta_value) as profile_image
+                ',
             );
 
             $builder->join('(SELECT user_id, secret FROM auth_identities WHERE type = "email_password") auth', 'auth.user_id = u.id', 'LEFT');

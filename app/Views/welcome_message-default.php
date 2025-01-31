@@ -230,7 +230,7 @@
         <h2>The small framework with powerful features</h2>
 
 
-        <img src="https://api.socceryou.ch/api/uploads/1720009353_0c509a2c2c02890414d0.png">
+        <img src="https://apitest.socceryou.ch/api/uploads/1720009353_0c509a2c2c02890414d0.png">
 
     </div>
 

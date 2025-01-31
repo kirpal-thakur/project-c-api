@@ -954,9 +954,6 @@ function getPlayersOnFrontend($whereClause = [], $metaQuery = [], $search = '', 
     }
 
     $userData = array_values($users);
-    echo '<pre>';
-    print_r( $userData);
-    die;
     return [
         'totalCount' => $totalCount,
         'users' => $userData

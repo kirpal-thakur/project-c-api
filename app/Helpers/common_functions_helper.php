@@ -2219,7 +2219,7 @@ function cropImage($imageDetails = array())
     // if (isset($imageDetails['imagePath']) && !empty($imageDetails['imagePath'])) {
     //     $imagePath = $imageDetails['imagePath'];
     // } else {
-    //     $imagePath = 'https://apitest.socceryou.ch/public/screenshots/2549.png';
+    //     $imagePath = 'https://api.socceryou.ch/public/screenshots/2549.png';
     // }
     // // echo $imagePath; die;
     // if (isset($imageDetails['contentType']) && $imageDetails['contentType'] == 'image/jpeg') {
@@ -2279,7 +2279,7 @@ function cropImage($imageDetails = array())
     if (isset($imageDetails['imagePath']) && !empty($imageDetails['imagePath'])) {
         $imagePath = $imageDetails['imagePath'];
     } else {
-        $imagePath = 'https://apitest.socceryou.ch/public/screenshots/2549.png';
+        $imagePath = 'https://api.socceryou.ch/public/screenshots/2549.png';
     }
 
     if (isset($imageDetails['contentType']) && $imageDetails['contentType'] == 'image/jpeg') {

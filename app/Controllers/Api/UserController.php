@@ -3076,6 +3076,7 @@ class UserController extends ResourceController
                 if (!$clubHistory) {
 
                     $save_data = [
+                        'user_id'       => $userID,
                         'meta_key'      => 'club_history',
                         'meta_value'    => $this->request->getVar("club_history"),
                     ];
@@ -3182,6 +3183,7 @@ class UserController extends ResourceController
 
                     $save_data = [
                         'id'            => $clubHistory['id'],
+                        'meta_key'    => 'club_history',
                         'meta_value'    => $this->request->getVar("club_history"),
                     ];
 

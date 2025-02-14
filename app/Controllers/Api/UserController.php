@@ -2319,6 +2319,8 @@ class UserController extends ResourceController
                 $userData->marked_favorite = false;
                 $favorite = $this->favoriteModel->where('user_id', auth()->id())->where('favorite_id', $user_id)->first();
                 if ($favorite) {
+                    $userData->favorite_id =  $favorite['id'];
+                   
                     $userData->marked_favorite = true;
                 }
             }
